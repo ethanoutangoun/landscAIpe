@@ -1,0 +1,33 @@
+.content p{
+  margin: 0;
+  padding: 0;
+
+}
+
+
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  border-bottom: 1px solid rgb(215, 215, 215);
+
+}
+
+
+.navbar-col{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-col h1{
+  font-size: 20px;
+}
+
+.navbar-colw{
+  flex: 2;
+}
