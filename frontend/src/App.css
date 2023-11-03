@@ -1,22 +1,21 @@
-.content p{
+
+
+
+.content p {
   margin: 0;
   padding: 0;
-
 }
 
 
-
-.navbar{
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 9px;
   border-bottom: 1px solid rgb(215, 215, 215);
-
 }
 
-
-.navbar-col{
+.navbar-col {
   flex: 1;
   display: flex;
   justify-content: center;
@@ -24,10 +23,49 @@
   gap: 10px;
 }
 
-.navbar-col h1{
+.navbar-col h1 {
   font-size: 20px;
 }
 
-.navbar-colw{
+.navbar-colw {
   flex: 1.5;
+}
+
+#icon-header:hover {
+  cursor: pointer;
+}
+
+#auth-buttons:hover {
+  cursor: pointer;
+  color: gray;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.hero h1{
+  font-size: 30px;
+  padding: 0;
+  margin: 0;
+  margin-top:20px
+}
+
+.hero h3{
+  font-size: 50px;
+  padding: 0;
+  margin: 0;
+  margin-top:10px
+}
+
+.footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  border-top: 1px solid rgb(215, 215, 215);
+  padding: 9px;
 }
