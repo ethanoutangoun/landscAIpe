@@ -12,7 +12,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 9px;
-  border-bottom: 1px solid rgb(215, 215, 215);
+  border-bottom: 1px solid rgb(231, 229, 229);
 }
 
 .navbar-col {
@@ -68,4 +68,27 @@
   margin-bottom: 40px;
   border-top: 1px solid rgb(215, 215, 215);
   padding: 9px;
+}
+
+.hero-descriptor{
+  margin-top: 15px;
+  max-width: 700px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.start-btn{
+  margin-top: 8px;
+  background-color: #16A34a;
+  border: None;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.start-btn:hover{
+  cursor: pointer;
+  background-color: gray;
 }
