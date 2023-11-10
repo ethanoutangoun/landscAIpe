@@ -83,6 +83,8 @@
 .start-btn{
   display: flex;
   gap: 5px;
+  align-items: center;
+  justify-content: center;
   margin-top: 8px;
   background-color: #16A34a;
   border: None;
