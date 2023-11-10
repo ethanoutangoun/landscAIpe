@@ -1,10 +1,13 @@
 
 const Map = () => {
   return (
-    <div>
+    <div className="map-container">
       <h1>Map</h1>
-     
+      
+      
+    
     </div>
+
   );
 };
 

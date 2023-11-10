@@ -81,14 +81,25 @@
 }
 
 .start-btn{
+  display: flex;
+  gap: 5px;
   margin-top: 8px;
   background-color: #16A34a;
   border: None;
   border-radius: 5px;
   padding: 10px;
+  font-size: 15px;
 }
 
 .start-btn:hover{
   cursor: pointer;
   background-color: gray;
+}
+
+
+.map-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }

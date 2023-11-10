@@ -1,9 +1,11 @@
 import "./App.css";
 import Hero from "./Hero";
-import Map from "./Map";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import About from "./About";
+import Contact from "./Contact";
+import Plan from "./Plan";
 
 function App() {
   return (
@@ -14,6 +16,18 @@ function App() {
           <Route exact path="/">
             <Hero />
             <Footer />
+          </Route>
+
+          <Route path="/plan">
+            <Plan />
+          </Route>
+
+          <Route path="/about">
+            <About />
+          </Route>
+
+          <Route path="/contact">
+            <Contact />
           </Route>
         </Switch>
       </div>
