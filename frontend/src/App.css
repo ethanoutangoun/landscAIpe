@@ -1,11 +1,7 @@
-
-
-
 .content p {
   margin: 0;
   padding: 0;
 }
-
 
 .navbar {
   display: flex;
@@ -47,21 +43,21 @@
   flex-direction: column;
 }
 
-.hero h1{
+.hero h1 {
   font-size: 30px;
   padding: 0;
   margin: 0;
-  margin-top:20px
+  margin-top: 20px;
 }
 
-.hero h3{
+.hero h3 {
   font-size: 50px;
   padding: 0;
   margin: 0;
-  margin-top:10px
+  margin-top: 10px;
 }
 
-.footer{
+.footer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,7 +66,7 @@
   padding: 9px;
 }
 
-.hero-descriptor{
+.hero-descriptor {
   margin-top: 15px;
   max-width: 700px;
   padding: 10px;
@@ -80,13 +76,13 @@
   text-align: center;
 }
 
-.start-btn{
+.start-btn {
   display: flex;
   gap: 5px;
   align-items: center;
   justify-content: center;
   margin-top: 8px;
-  background-color: #16A34a;
+  background-color: #16a34a;
   border: None;
   border-radius: 5px;
   padding: 10px;
@@ -94,15 +90,41 @@
   color: white;
 }
 
-.start-btn:hover{
+.start-btn:hover {
   cursor: pointer;
   background-color: gray;
 }
 
-
-.map-container{
+.map-container-main {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.map-container-wrapper {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+  background-color: gray;
+  padding: 20px;
+  width: 1000px;
+}
+
+.map-container {
+  height: 400px;
+  width: 1000px;
+}
+
+.sidebar {
+  background-color: rgba(35, 55, 75, 0.9);
+  color: #fff;
+  padding: 6px 12px;
+  font-family: monospace;
+  z-index: 1;
+
+  margin: 12px;
+  border-radius: 4px;
 }
