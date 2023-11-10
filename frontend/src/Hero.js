@@ -1,6 +1,7 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 
+
 const Hero = () => {
   const history = useHistory();
   return (
