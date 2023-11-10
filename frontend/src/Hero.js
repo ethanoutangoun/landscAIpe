@@ -1,4 +1,5 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 
 const Hero = () => {
   const history = useHistory();
@@ -14,7 +15,7 @@ const Hero = () => {
       </div>
 
       <button className="start-btn" onClick={() => history.push("/plan")}>
-        <p>pic</p>
+        <AutoAwesomeIcon />
         <p>Get Started</p>
       </button>
 
