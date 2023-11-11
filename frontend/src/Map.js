@@ -1,12 +1,15 @@
 import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
-
-mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
+import { AddressAutofill } from "@mapbox/search-js-react";
+import { SearchBox } from "@mapbox/search-js-react";
 
 const Map = () => {
+  const accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
+  mapboxgl.accessToken = accessToken;
+
   const mapContainer = useRef(null);
   const map = useRef(null);
-  
+  const [value, setValue] = React.useState("");
   const [lng, setLng] = useState(-120.6556);
   const [lat, setLat] = useState(35.2901);
   const [zoom, setZoom] = useState(12);
@@ -25,12 +28,22 @@ const Map = () => {
       setLat(map.current.getCenter().lat.toFixed(4));
       setZoom(map.current.getZoom().toFixed(2));
     });
-  });
+  }, []);
 
   return (
     <div className="map-container-main">
       <h1>Map</h1>
       <div className="map-container-wrapper">
+        <form>
+          <SearchBox accessToken={accessToken} map={map.current && map.current}>
+            <input
+              placeholder="enter an address"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+            />
+          </SearchBox>
+        </form>
+
         <div className="sidebar">
           Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
         </div>
