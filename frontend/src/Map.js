@@ -84,8 +84,8 @@ const Map = () => {
         <div className="control-box">
           <h3>Select Location</h3>
 
-          <form>
-            {mapReady && (
+          {map.current && (<form>
+            
               <SearchBox
                 accessToken={accessToken}
                 map={map.current}
@@ -97,8 +97,8 @@ const Map = () => {
                   onChange={(e) => setValue(e.target.value)}
                 />
               </SearchBox>
-            )}
-          </form>
+            
+          </form>)}
 
           <h4 className="confirm-btn" onClick={handleConfirm}>
             Confirm
