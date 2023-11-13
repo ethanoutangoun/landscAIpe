@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
 .content p {
   margin: 0;
   padding: 0;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .navbar {
@@ -9,6 +12,7 @@
   align-items: center;
   padding: 9px;
   border-bottom: 1px solid rgb(231, 229, 229);
+  font-family: 'Montserrat', sans-serif;
 }
 
 .navbar-col {
@@ -36,11 +40,17 @@
   color: gray;
 }
 
+
+
 .hero {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding-top: 7px;
+  background: linear-gradient(to bottom,  rgb(240, 240, 240), rgb(256, 256, 256)); 
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .hero h1 {
@@ -61,9 +71,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 40px;
-  border-top: 1px solid rgb(215, 215, 215);
-  padding: 9px;
+  background-color: rgb(240, 240, 240);
+
+  padding: 25px;
+  
+}
+
+.footer p{
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
 }
 
 .hero-descriptor {

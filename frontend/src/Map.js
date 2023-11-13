@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
-import { AddressAutofill } from "@mapbox/search-js-react";
 import { SearchBox } from "@mapbox/search-js-react";
 
 const Map = () => {
@@ -9,7 +8,10 @@ const Map = () => {
 
   const mapContainer = useRef(null);
   const map = useRef(null);
+
   const [value, setValue] = React.useState("");
+
+  //set initial map state
   const [lng, setLng] = useState(-120.6556);
   const [lat, setLat] = useState(35.2901);
   const [zoom, setZoom] = useState(12);
