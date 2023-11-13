@@ -51,6 +51,20 @@
   font-family: "Montserrat", sans-serif;
 }
 
+.title-sec {
+  display: flex;
+  align-items: center;
+}
+.gradient-ai {
+
+  background: #CFBC0E;
+background: linear-gradient(to right, #CFBC0E 0%, #CF571B 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+
+
+
+}
 .hero img {
   margin-top: 15px;
   max-width: 100%;
@@ -213,9 +227,7 @@
   padding: 10px;
   font-family: "Inter", sans-serif;
   font-size: 14px;
-
 }
-
 
 .popover-btn:hover {
   cursor: pointer;
