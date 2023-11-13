@@ -51,6 +51,12 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+.hero img{
+  margin-top: 15px;
+  max-width: 100%;
+  height: auto;
+}
+
 .hero h1 {
   font-size: 30px;
   padding: 0;
