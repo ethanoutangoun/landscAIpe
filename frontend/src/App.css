@@ -112,23 +112,43 @@
 
 .map-container-main {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
+
+ 
+}
+
+
+
+.control-area{
+ 
+  flex: 1;
+  padding: 20px;
+  
+}
+
+
+.control-box{
+  border: 2px solid rgb(228, 228, 228);
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  border-radius: 10px;
 }
 
 .map-container-wrapper {
   display: flex;
+  flex: 2;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  width: 1000px;
+  height: 95vh;
+ 
 }
 
 .map-container {
-  height: 400px;
-  width: 1000px;
+  height: 100%;
+  width: 100%;
 }
 
 .sidebar {
@@ -137,7 +157,18 @@
   padding: 6px 12px;
   font-family: monospace;
   z-index: 1;
-
+  position: absolute;
+  top: 90px;
+  
   margin: 12px;
   border-radius: 4px;
+}
+
+.upper{
+  display: flex;
+
+}
+
+.selectors{
+  background-color: red;
 }

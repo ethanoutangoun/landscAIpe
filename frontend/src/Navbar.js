@@ -23,7 +23,7 @@ const Navbar = () => {
           About
         </p>
         <p id="auth-buttons" onClick={() => history.push("/contact")}>
-          Contact Us
+          Contact
         </p>
         <img
           id="auth-buttons"

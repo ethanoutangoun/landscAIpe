@@ -30,25 +30,33 @@ const Map = () => {
       setLat(map.current.getCenter().lat.toFixed(4));
       setZoom(map.current.getZoom().toFixed(2));
     });
-  }, []);
+  },);
 
   return (
     <div className="map-container-main">
-      <h1>Map</h1>
-      <div className="map-container-wrapper">
-        <form>
-          <SearchBox accessToken={accessToken} map={map.current && map.current}>
-            <input
-              placeholder="enter an address"
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-            />
-          </SearchBox>
-        </form>
+      <div className="control-area">
+        <div className="control-box">
+          <h3>Select Location</h3>
+          <form>
+            <SearchBox
+              accessToken={accessToken}
+              map={map.current && map.current}
+            >
+              <input
+                placeholder="enter an address"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+              />
+            </SearchBox>
+          </form>
+        </div>
+      </div>
 
+      <div className="map-container-wrapper">
         <div className="sidebar">
           Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
         </div>
+
         <div ref={mapContainer} className="map-container" />
       </div>
     </div>
