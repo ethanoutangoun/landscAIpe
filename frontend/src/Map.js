@@ -1,6 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import { SearchBox } from "@mapbox/search-js-react";
+import YardIcon from "@mui/icons-material/Yard";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import EyeDropDown from "./EyeDropDown";
 
 const Map = () => {
   const accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
@@ -17,6 +20,18 @@ const Map = () => {
   const [zoom, setZoom] = useState(12);
 
   const [mapReady, setMapReady] = useState(false);
+
+  const handleOne = () => {
+    map.current.setStyle("mapbox://styles/mapbox/streets-v12");
+  };
+
+  const handleTwo = () => {
+    map.current.setStyle("mapbox://styles/mapbox/satellite-v9");
+  };
+
+
+  
+
 
   useEffect(() => {
     if (map.current) {
@@ -44,6 +59,7 @@ const Map = () => {
       <div className="control-area">
         <div className="control-box">
           <h3>Select Location</h3>
+
           <form>
             {mapReady && (
               <SearchBox
@@ -59,6 +75,11 @@ const Map = () => {
               </SearchBox>
             )}
           </form>
+
+          <h4 className="confirm-btn">
+            Confirm
+            <ArrowForwardIcon />
+          </h4>
         </div>
       </div>
 
@@ -66,6 +87,7 @@ const Map = () => {
         <div className="sidebar">
           Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
         </div>
+        <EyeDropDown className="eyedropdown" handleOne={handleOne} handleTwo={handleTwo} />
 
         <div ref={mapContainer} className="map-container" />
       </div>
