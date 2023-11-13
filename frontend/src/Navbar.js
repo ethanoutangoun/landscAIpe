@@ -13,9 +13,11 @@ const Navbar = () => {
           width="30px"
           onClick={() => history.push("/")}
         />
-        <h1 id="icon-header" onClick={() => history.push("/")}>
-          LandScAIpe
-        </h1>
+        <div id="icon-header" onClick={() => history.push("/")}>
+          <h1>LandSc</h1>
+          <h1 className="gradient-ai">AI</h1>
+          <h1>pe</h1>
+        </div>
       </div>
 
       <div className="navbar-col">
