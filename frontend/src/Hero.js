@@ -11,7 +11,7 @@ const Hero = () => {
       <div className="hero-descriptor">
         <p>
           LandScAIpe is a web application that allows users to plan their
-          landscaping projects with ease. Developed as a project for CSC 480.
+          landscaping projects with ease. Developed as a project at Cal Poly for CSC 480.
         </p>
       </div>
 
@@ -20,7 +20,7 @@ const Hero = () => {
         <p>Get Started</p>
       </button>
 
-      <img src="maps-demo.png" alt="" width="950px" />
+      <img src="demo.png" alt="" width="950px" />
     </div>
   );
 };
