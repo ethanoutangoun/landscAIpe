@@ -99,8 +99,7 @@ const Map = () => {
       .then((data) => {
         setIsPending(false);
         console.log("Data:", data);
-      
-      })  
+      })
       .catch((error) => {
         setIsPending(false);
         console.error("Error:", error.message);
@@ -134,9 +133,7 @@ const Map = () => {
             <ArrowForwardIcon />
           </h4>
 
-          <h4 className="confirm-btn" onClick={handleRetrieve}>
-            Get Data
-          </h4>
+          <h4 className="confirm-btn">Get Data</h4>
           {isPending && <div>Loading...</div>}
         </div>
       </div>
