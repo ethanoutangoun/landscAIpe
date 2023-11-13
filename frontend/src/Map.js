@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import { SearchBox } from "@mapbox/search-js-react";
-import YardIcon from "@mui/icons-material/Yard";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import EyeDropDown from "./EyeDropDown";
 import html2canvas from "html2canvas";
+import useFetch from "./useFetch";
 
 const Map = () => {
   const accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
@@ -21,7 +21,7 @@ const Map = () => {
   const [zoom, setZoom] = useState(12);
 
   const [mapReady, setMapReady] = useState(false);
-  const [loading, setLoading] = useState(false);
+
   const handleOne = () => {
     map.current.setStyle("mapbox://styles/mapbox/streets-v12");
   };
@@ -41,7 +41,6 @@ const Map = () => {
     handleTwo();
     setPictureMode(!pictureMode);
     handleScreenshot();
-    console.log("confirm");
   };
 
   async function handleScreenshot() {
@@ -78,14 +77,44 @@ const Map = () => {
     });
   }, [lng, lat, zoom]);
 
+  const [isPending, setIsPending] = useState(false);
+
+  const url = "http://localhost:8080/api/data";
+
+  const handleRetrieve = () => {
+    setIsPending(true);
+    fetch(url, {
+      method: "GET",
+      mode: "cors",
+    })
+      .then((res) => {
+        console.log("Response Status:", res.status);
+
+        if (!res.ok) {
+          throw Error("Could not fetch the data for that resource");
+        }
+
+        return res.json();
+      })
+      .then((data) => {
+        setIsPending(false);
+        console.log("Data:", data);
+      
+      })  
+      .catch((error) => {
+        setIsPending(false);
+        console.error("Error:", error.message);
+      });
+  };
+
   return (
     <div className="map-container-main">
       <div className="control-area">
         <div className="control-box">
           <h3>Select Location</h3>
 
-          {map.current && (<form>
-            
+          {map.current && (
+            <form>
               <SearchBox
                 accessToken={accessToken}
                 map={map.current}
@@ -97,13 +126,18 @@ const Map = () => {
                   onChange={(e) => setValue(e.target.value)}
                 />
               </SearchBox>
-            
-          </form>)}
+            </form>
+          )}
 
           <h4 className="confirm-btn" onClick={handleConfirm}>
             Confirm
             <ArrowForwardIcon />
           </h4>
+
+          <h4 className="confirm-btn" onClick={handleRetrieve}>
+            Get Data
+          </h4>
+          {isPending && <div>Loading...</div>}
         </div>
       </div>
 
