@@ -16,8 +16,15 @@ const Map = () => {
   const [lat, setLat] = useState(35.2901);
   const [zoom, setZoom] = useState(12);
 
+  const [mapReady, setMapReady] = useState(false);
+
   useEffect(() => {
-    if (map.current) return; // initialize map only once
+    if (map.current) {
+      setMapReady(true);
+
+      return; // initialize map only once
+    }
+
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v12",
@@ -30,7 +37,7 @@ const Map = () => {
       setLat(map.current.getCenter().lat.toFixed(4));
       setZoom(map.current.getZoom().toFixed(2));
     });
-  },);
+  }, [lng, lat, zoom]);
 
   return (
     <div className="map-container-main">
@@ -38,16 +45,19 @@ const Map = () => {
         <div className="control-box">
           <h3>Select Location</h3>
           <form>
-            <SearchBox
-              accessToken={accessToken}
-              map={map.current && map.current}
-            >
-              <input
-                placeholder="enter an address"
+            {mapReady && (
+              <SearchBox
+                accessToken={accessToken}
+                map={map.current}
                 value={value}
-                onChange={(e) => setValue(e.target.value)}
-              />
-            </SearchBox>
+              >
+                <input
+                  placeholder="enter an address"
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                />
+              </SearchBox>
+            )}
           </form>
         </div>
       </div>
