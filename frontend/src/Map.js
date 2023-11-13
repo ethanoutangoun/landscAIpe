@@ -21,7 +21,7 @@ const Map = () => {
   const [zoom, setZoom] = useState(12);
 
   const [mapReady, setMapReady] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const handleOne = () => {
     map.current.setStyle("mapbox://styles/mapbox/streets-v12");
   };
@@ -32,8 +32,9 @@ const Map = () => {
 
   const [pictureMode, setPictureMode] = useState(false);
 
+  const [imageData, setImageData] = useState(null);
   function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   const handleConfirm = () => {
@@ -43,21 +44,17 @@ const Map = () => {
     console.log("confirm");
   };
 
-   async function handleScreenshot(){
+  async function handleScreenshot() {
     await sleep(1000);
     html2canvas(mapContainer.current)
       .then((canvas) => {
         const dataURL = canvas.toDataURL(); // Base64-encoded image data
-        const link = document.createElement("a");
-        link.href = dataURL;
-        link.download = "map_screenshot.png";
-        link.click();
+        setImageData(dataURL);
       })
       .catch((error) => {
         console.error("Error taking screenshot:", error);
       });
-  };
-  
+  }
 
   useEffect(() => {
     if (map.current) {
@@ -71,7 +68,7 @@ const Map = () => {
       style: "mapbox://styles/mapbox/streets-v12",
       center: [lng, lat],
       zoom: zoom,
-      preserveDrawingBuffer: true
+      preserveDrawingBuffer: true,
     });
 
     map.current.on("move", () => {
@@ -123,8 +120,10 @@ const Map = () => {
             handleTwo={handleTwo}
           />
         )}
-
-        <div ref={mapContainer} className="map-container" />
+        {imageData && (
+          <img className="map-container" src={imageData} alt="Captured" />
+        )}
+        {!imageData && <div ref={mapContainer} className="map-container" />}
       </div>
     </div>
   );
