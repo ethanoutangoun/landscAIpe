@@ -20,16 +20,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 
 .navbar-col h1 {
   font-size: 20px;
 }
 
-.navbar-colw {
-  flex: 1.5;
-}
+
 
 #icon-header:hover {
   cursor: pointer;
