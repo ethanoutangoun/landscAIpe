@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap");
 .content p {
   margin: 0;
   padding: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .navbar {
@@ -12,7 +12,7 @@
   align-items: center;
   padding: 9px;
   border-bottom: 1px solid rgb(231, 229, 229);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .navbar-col {
@@ -27,8 +27,6 @@
   font-size: 20px;
 }
 
-
-
 #icon-header:hover {
   cursor: pointer;
 }
@@ -38,20 +36,22 @@
   color: gray;
 }
 
-
-
 .hero {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   padding-top: 7px;
-  background: linear-gradient(to bottom,  rgb(240, 240, 240), rgb(256, 256, 256)); 
+  background: linear-gradient(
+    to bottom,
+    rgb(240, 240, 240),
+    rgb(256, 256, 256)
+  );
   min-height: 100vh;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
-.hero img{
+.hero img {
   margin-top: 15px;
   max-width: 100%;
   height: auto;
@@ -78,11 +78,10 @@
   background-color: rgb(240, 240, 240);
 
   padding: 25px;
-  
 }
 
-.footer p{
-  font-family: 'Inter', sans-serif;
+.footer p {
+  font-family: "Inter", sans-serif;
   font-weight: 300;
   font-size: 15px;
 }
@@ -119,21 +118,14 @@
 .map-container-main {
   display: flex;
   justify-content: center;
-
- 
 }
 
-
-
-.control-area{
- 
+.control-area {
   flex: 1;
   padding: 20px;
-  
 }
 
-
-.control-box{
+.control-box {
   border: 2px solid rgb(228, 228, 228);
   padding-left: 20px;
   padding-right: 20px;
@@ -148,8 +140,7 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
-  height: 95vh;
- 
+  height: 91vh;
 }
 
 .map-container {
@@ -165,16 +156,15 @@
   z-index: 1;
   position: absolute;
   top: 90px;
-  
+
   margin: 12px;
   border-radius: 4px;
 }
 
-.upper{
+.upper {
   display: flex;
-
 }
 
-.selectors{
+.selectors {
   background-color: red;
 }
