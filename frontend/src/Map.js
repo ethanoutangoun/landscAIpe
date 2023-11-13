@@ -4,6 +4,7 @@ import { SearchBox } from "@mapbox/search-js-react";
 import YardIcon from "@mui/icons-material/Yard";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import EyeDropDown from "./EyeDropDown";
+import html2canvas from "html2canvas";
 
 const Map = () => {
   const accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
@@ -29,9 +30,34 @@ const Map = () => {
     map.current.setStyle("mapbox://styles/mapbox/satellite-v9");
   };
 
+  const [pictureMode, setPictureMode] = useState(false);
 
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  const handleConfirm = () => {
+    handleTwo();
+    setPictureMode(!pictureMode);
+    handleScreenshot();
+    console.log("confirm");
+  };
+
+   async function handleScreenshot(){
+    await sleep(1000);
+    html2canvas(mapContainer.current)
+      .then((canvas) => {
+        const dataURL = canvas.toDataURL(); // Base64-encoded image data
+        const link = document.createElement("a");
+        link.href = dataURL;
+        link.download = "map_screenshot.png";
+        link.click();
+      })
+      .catch((error) => {
+        console.error("Error taking screenshot:", error);
+      });
+  };
   
-
 
   useEffect(() => {
     if (map.current) {
@@ -45,6 +71,7 @@ const Map = () => {
       style: "mapbox://styles/mapbox/streets-v12",
       center: [lng, lat],
       zoom: zoom,
+      preserveDrawingBuffer: true
     });
 
     map.current.on("move", () => {
@@ -76,7 +103,7 @@ const Map = () => {
             )}
           </form>
 
-          <h4 className="confirm-btn">
+          <h4 className="confirm-btn" onClick={handleConfirm}>
             Confirm
             <ArrowForwardIcon />
           </h4>
@@ -84,10 +111,18 @@ const Map = () => {
       </div>
 
       <div className="map-container-wrapper">
-        <div className="sidebar">
-          Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-        </div>
-        <EyeDropDown className="eyedropdown" handleOne={handleOne} handleTwo={handleTwo} />
+        {!pictureMode && (
+          <div className="sidebar">
+            Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+          </div>
+        )}
+        {!pictureMode && (
+          <EyeDropDown
+            className="eyedropdown"
+            handleOne={handleOne}
+            handleTwo={handleTwo}
+          />
+        )}
 
         <div ref={mapContainer} className="map-container" />
       </div>

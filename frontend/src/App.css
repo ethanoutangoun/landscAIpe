@@ -30,7 +30,6 @@
 #icon-header {
   display: flex;
   align-items: center;
- 
 }
 
 #icon-header:hover {
@@ -62,14 +61,10 @@
   align-items: center;
 }
 .gradient-ai {
-
-  background: #CFBC0E;
-background: linear-gradient(to right, #CFBC0E 0%, #CF571B 100%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-
-
-
+  background: #cfbc0e;
+  background: linear-gradient(to right, #cfbc0e 0%, #cf571b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .hero img {
   margin-top: 15px;
