@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import About from "./About";
 import Contact from "./Contact";
-import Plan from "./Plan";
+import Map from "./Map";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
           </Route>
 
           <Route path="/plan">
-            <Plan />
+            <Map />
           </Route>
 
           <Route path="/about">

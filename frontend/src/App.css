@@ -130,9 +130,14 @@
   background-color: #0d6c30;
 }
 
+
+
 .map-container-main {
   display: flex;
   justify-content: center;
+
+
+
 }
 
 .control-area {
