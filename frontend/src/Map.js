@@ -122,7 +122,7 @@ const Map = () => {
 
     console.log(postData);
 
-    fetch("http://localhost:8080/api/process", {
+    fetch("http://localhost:8000/api/process", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
