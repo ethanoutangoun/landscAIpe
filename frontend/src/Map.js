@@ -122,7 +122,7 @@ const Map = () => {
 
     console.log(postData);
 
-    fetch("http://localhost:8000/api/process", {
+    fetch("https://blooming-inlet-13535-f46fa0b9cfef.herokuapp.com/api/process", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
