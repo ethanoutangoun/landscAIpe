@@ -4,7 +4,7 @@ import { SearchBox } from "@mapbox/search-js-react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import EyeDropDown from "./EyeDropDown";
 import html2canvas from "html2canvas";
-import useFetch from "./useFetch";
+
 
 const Map = () => {
   const accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
@@ -79,35 +79,13 @@ const Map = () => {
 
   const [isPending, setIsPending] = useState(false);
 
-  const url = "http://localhost:8080/api/data";
+  const url = "https://blooming-inlet-13535-f46fa0b9cfef.herokuapp.com/api/process";
 
-  const handleRetrieve = () => {
-    setIsPending(true);
-    fetch(url, {
-      method: "GET",
-      mode: "cors",
-    })
-      .then((res) => {
-        console.log("Response Status:", res.status);
-
-        if (!res.ok) {
-          throw Error("Could not fetch the data for that resource");
-        }
-
-        return res.json();
-      })
-      .then((data) => {
-        setIsPending(false);
-        console.log("Data:", data);
-      })
-      .catch((error) => {
-        setIsPending(false);
-        console.error("Error:", error.message);
-      });
-  };
+  
 
   const handlePost = () => {
     console.log("Posting data...");
+    setIsPending(true);
 
     if (!imageData) {
       console.error("No imageData available to post.");
@@ -122,7 +100,7 @@ const Map = () => {
 
     console.log(postData);
 
-    fetch("https://blooming-inlet-13535-f46fa0b9cfef.herokuapp.com/api/process", {
+    fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -136,7 +114,7 @@ const Map = () => {
         if (!res.ok) {
           throw Error("Could not post the data");
         }
-
+        setIsPending(false);
         return res.json();
       })
       .then((data) => {
