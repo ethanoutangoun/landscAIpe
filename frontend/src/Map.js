@@ -108,23 +108,21 @@ const Map = () => {
 
   const handlePost = () => {
     console.log("Posting data...");
-  
+
     if (!imageData) {
       console.error("No imageData available to post.");
       return;
     }
-  
+
     const postData = {
-      // Assuming 'imageData' is a key that your backend expects
+
       image: imageData,
-      // You can include additional data if needed
-      // key1: "value1",
-      // key2: "value2",
+    
     };
 
-    console.log(postData)
-  
-    fetch('http://localhost:8080/api/process', {
+    console.log(postData);
+
+    fetch("http://localhost:8080/api/process", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -134,22 +132,21 @@ const Map = () => {
     })
       .then((res) => {
         console.log("Response Status:", res.status);
-  
+
         if (!res.ok) {
           throw Error("Could not post the data");
         }
-  
+
         return res.json();
       })
       .then((data) => {
-        console.log("Data:", data);
+        const base64Image = data.image;
+        setImageData(`data:image/jpeg;base64,${base64Image}`);
       })
       .catch((error) => {
         console.error("Error:", error.message);
       });
   };
-  
-
 
   return (
     <div className="map-container-main">
@@ -178,11 +175,11 @@ const Map = () => {
             <ArrowForwardIcon />
           </h4>
 
-          <h4 className="confirm-btn" onClick={handlePost}>Post Data</h4>
-
-
-
-
+          {imageData && (
+            <h4 className="confirm-btn" onClick={handlePost}>
+              Post Data
+            </h4>
+          )}
 
           {isPending && <div>Loading...</div>}
         </div>
