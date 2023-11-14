@@ -38,23 +38,27 @@ def process_image():
             image_binary = base64.b64decode(image_data.split(',')[1])
         except Exception as e:
             return jsonify({'error': 'Invalid image data format'}), 400
+        
+
 
         # # Save the original image to the server directory
         # original_image_filename = 'received_image.png'
         # with open(original_image_filename, 'wb') as original_image_file:
         #     original_image_file.write(image_binary)
 
+
+
+
         # Convert the image to black and white
         output_image_bytes = convert_to_black_and_white(image_binary)
 
         # Save the black and white image to a file
-        output_image_filename = 'output.jpg'
-        with open(output_image_filename, 'wb') as output_image_file:
-            output_image_file.write(output_image_bytes)
+        # output_image_filename = 'output.jpg'
+        # with open(output_image_filename, 'wb') as output_image_file:
+        #     output_image_file.write(output_image_bytes)
 
      
-        print(f"Black and white image saved to {output_image_filename}")
-
+       
         # Encode the black and white image data as base64
         base64_output = base64.b64encode(output_image_bytes).decode('utf-8')
 
