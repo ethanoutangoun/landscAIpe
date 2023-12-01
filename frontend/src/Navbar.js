@@ -22,11 +22,9 @@ const Navbar = () => {
 
       <div className="navbar-col">
         <p id="auth-buttons" onClick={() => history.push("/about")}>
-          About
+          Learn More
         </p>
-        <p id="auth-buttons" onClick={() => history.push("/contact")}>
-          Contact
-        </p>
+      
         <img
           id="auth-buttons"
           src="github-icon.png"

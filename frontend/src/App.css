@@ -130,14 +130,9 @@
   background-color: #0d6c30;
 }
 
-
-
 .map-container-main {
   display: flex;
   justify-content: center;
-
-
-
 }
 
 .control-area {
@@ -194,17 +189,19 @@
 }
 
 .confirm-btn {
-  margin-top: 20px;
+  margin: 0px;
+  margin-bottom: 10px;
   background-color: rgb(4, 150, 213);
-  padding: 7px;
+  padding: 9px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 20px;
   color: white;
-  min-width: 50%;
   gap: 5px;
 }
+
+
 
 .confirm-btn:hover {
   cursor: pointer;
@@ -238,4 +235,30 @@
 .popover-btn:hover {
   cursor: pointer;
   background-color: rgb(240, 240, 240);
+}
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
+  background: linear-gradient(
+    to bottom,
+    rgb(240, 240, 240),
+    rgb(256, 256, 256)
+  );
+  font-family: "Montserrat", sans-serif;
+}
+
+.about-p {
+  max-width: 1200px;
+  font-size: 18px;
+}
+
+.search-box {
+  margin-bottom: 20px;
 }

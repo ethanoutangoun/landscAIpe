@@ -4,6 +4,8 @@ import { SearchBox } from "@mapbox/search-js-react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import EyeDropDown from "./EyeDropDown";
 import html2canvas from "html2canvas";
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 
 
 const Map = () => {
@@ -19,15 +21,17 @@ const Map = () => {
   const [lng, setLng] = useState(-120.6556);
   const [lat, setLat] = useState(35.2901);
   const [zoom, setZoom] = useState(12);
-
+  const [satView, setSatView] = useState(false);
   const [mapReady, setMapReady] = useState(false);
 
   const handleOne = () => {
     map.current.setStyle("mapbox://styles/mapbox/streets-v12");
+    setSatView(false);
   };
 
   const handleTwo = () => {
     map.current.setStyle("mapbox://styles/mapbox/satellite-v9");
+    setSatView(true);
   };
 
   const [pictureMode, setPictureMode] = useState(false);
@@ -75,7 +79,7 @@ const Map = () => {
       setLat(map.current.getCenter().lat.toFixed(4));
       setZoom(map.current.getZoom().toFixed(2));
     });
-  }, [lng, lat, zoom]);
+  }, [lng, lat, zoom, mapReady]);
 
   const [isPending, setIsPending] = useState(false);
 
@@ -133,7 +137,7 @@ const Map = () => {
           <h3>Select Location</h3>
 
           {map.current && (
-            <form>
+            <form className="search-box">
               <SearchBox
                 accessToken={accessToken}
                 map={map.current}
@@ -148,16 +152,24 @@ const Map = () => {
             </form>
           )}
 
-          <h4 className="confirm-btn" onClick={handleConfirm}>
+          {!satView && <h4 className="confirm-btn" onClick={handleTwo}>
+            Enter Picture Mode
+            <PhotoCameraIcon />
+          </h4>}
+
+          {(satView && !imageData) && <h4 className="confirm-btn" onClick={handleConfirm}>
             Confirm
             <ArrowForwardIcon />
-          </h4>
+          </h4>}
+          
+         
 
-          {imageData && (
+          {imageData && 
             <h4 className="confirm-btn" onClick={handlePost}>
               Post Data
+              <AutoAwesomeIcon/>
             </h4>
-          )}
+          }
 
           {isPending && <div>Loading...</div>}
         </div>
@@ -169,6 +181,8 @@ const Map = () => {
             Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
           </div>
         )}
+
+
         {!pictureMode && (
           <EyeDropDown
             className="eyedropdown"
