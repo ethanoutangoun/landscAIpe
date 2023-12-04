@@ -23,6 +23,7 @@ const Map = () => {
   const [zoom, setZoom] = useState(12);
   const [satView, setSatView] = useState(false);
   const [mapReady, setMapReady] = useState(false);
+  const [zipcode, setZipcode] = useState(null);
 
   const handleOne = () => {
     map.current.setStyle("mapbox://styles/mapbox/streets-v12");
@@ -34,6 +35,25 @@ const Map = () => {
     setSatView(true);
   };
 
+  const getZipcode = () => {
+    fetch(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${accessToken}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        data.features.forEach((feature) => {
+          if (feature.id.includes("postcode")) {
+            setZipcode(feature.text);
+          }
+        }); // Close the forEach loop properly
+      })
+      .catch((error) => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+  };
+  
+
+
   const [pictureMode, setPictureMode] = useState(false);
 
   const [imageData, setImageData] = useState(null);
@@ -42,6 +62,7 @@ const Map = () => {
   }
 
   const handleConfirm = () => {
+    getZipcode();
     handleTwo();
     setPictureMode(!pictureMode);
     handleScreenshot();
@@ -162,6 +183,7 @@ const Map = () => {
             <ArrowForwardIcon />
           </h4>}
           
+          
          
 
           {imageData && 
@@ -172,6 +194,9 @@ const Map = () => {
           }
 
           {isPending && <div>Loading...</div>}
+
+
+          {zipcode && <h4>Zipcode: {zipcode}</h4>}
         </div>
       </div>
 
