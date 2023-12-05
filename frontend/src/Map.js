@@ -4,10 +4,9 @@ import { SearchBox } from "@mapbox/search-js-react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import EyeDropDown from "./EyeDropDown";
 import html2canvas from "html2canvas";
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-
-
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import CustomAccordion from "./CustomAccordion";
 
 const Map = () => {
   const accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
@@ -25,6 +24,8 @@ const Map = () => {
   const [satView, setSatView] = useState(false);
   const [mapReady, setMapReady] = useState(false);
   const [zipcode, setZipcode] = useState(null);
+
+  const [plants, setPlants] = useState();
 
   // state to verify if data from the Mask RCNN API has been fetched
   const [isProcessed, setIsProcessed] = useState(false);
@@ -52,11 +53,9 @@ const Map = () => {
         }); // Close the forEach loop properly
       })
       .catch((error) => {
-        console.error('There was a problem with the fetch operation:', error);
+        console.error("There was a problem with the fetch operation:", error);
       });
   };
-  
-
 
   const [pictureMode, setPictureMode] = useState(false);
 
@@ -108,26 +107,21 @@ const Map = () => {
 
   const [isPending, setIsPending] = useState(false);
 
-  const url = "https://blooming-inlet-13535-f46fa0b9cfef.herokuapp.com/api/process";
-
-  
+  const url =
+    "https://blooming-inlet-13535-f46fa0b9cfef.herokuapp.com/api/process";
 
   const handlePost = () => {
     console.log("Posting data...");
     setIsPending(true);
-
+    handleNativePlants();
     if (!imageData) {
       console.error("No imageData available to post.");
       return;
     }
 
     const postData = {
-
       image: imageData,
-    
     };
-
-    
 
     fetch(url, {
       method: "POST",
@@ -138,8 +132,6 @@ const Map = () => {
       body: JSON.stringify(postData),
     })
       .then((res) => {
-        console.log("Response Status:", res.status);
-
         if (!res.ok) {
           throw Error("Could not post the data");
         }
@@ -156,77 +148,99 @@ const Map = () => {
       });
   };
 
+  const handleNativePlants = () => {
+    const plantUrl =
+      "https://blooming-inlet-13535-f46fa0b9cfef.herokuapp.com/api/nativeplants/" +
+      zipcode;
+
+    fetch(plantUrl, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: "cors",
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+
+        return res.json(); // Parse response body as JSON
+      })
+      .then((data) => {
+        setPlants(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error.message);
+      });
+  };
+
   return (
-    
     <div className="map-container-main">
+      {!isProcessed && (
+        <div className="control-area">
+          <div className="control-box">
+            <h3>Select Location</h3>
 
-
-      {!isProcessed && <div className="control-area">
-        <div className="control-box">
-          <h3>Select Location</h3>
-
-          {map.current && (
-            <form className="search-box">
-              <SearchBox
-                accessToken={accessToken}
-                map={map.current}
-                value={value}
-              >
-                <input
-                  placeholder="enter an address"
+            {map.current && (
+              <form className="search-box">
+                <SearchBox
+                  accessToken={accessToken}
+                  map={map.current}
                   value={value}
-                  onChange={(e) => setValue(e.target.value)}
-                />
-              </SearchBox>
-            </form>
-          )}
+                >
+                  <input
+                    placeholder="enter an address"
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                  />
+                </SearchBox>
+              </form>
+            )}
 
-          {!satView && <h4 className="confirm-btn" onClick={handleTwo}>
-            Enter Picture Mode
-            <PhotoCameraIcon />
-          </h4>}
+            {!satView && (
+              <h4 className="confirm-btn" onClick={handleTwo}>
+                Enter Picture Mode
+                <PhotoCameraIcon />
+              </h4>
+            )}
 
-          {(satView && !imageData) && <h4 className="confirm-btn" onClick={handleConfirm}>
-            Confirm
-            <ArrowForwardIcon />
-          </h4>}
-          
+            {satView && !imageData && (
+              <h4 className="confirm-btn" onClick={handleConfirm}>
+                Confirm
+                <ArrowForwardIcon />
+              </h4>
+            )}
+
+            {imageData && (
+              <h4 className="confirm-btn" onClick={handlePost}>
+                Post Data
+                <AutoAwesomeIcon />
+              </h4>
+            )}
+
+            {isPending && <div>Loading...</div>}
+          </div>
+        </div>
+      )}
+
+      {isProcessed && plants && (
+        <div className="control-area">
           
          
-
-          {imageData && 
-            <h4 className="confirm-btn" onClick={handlePost}>
-              Post Data
-              <AutoAwesomeIcon/>
-            </h4>
-          }
-
-          {isPending && <div>Loading...</div>}
-
-
-          {zipcode && <h4>Zipcode: {zipcode}</h4>}
+          <CustomAccordion plants = {plants} className="accordion"/>
+      
+          
         </div>
-      </div>}
+      )}
 
-      {isProcessed && <div className="control-area">
-        <div className="control-box">
-          <h3>Suggested Plants</h3>
-          <h4>Full Sun Plants</h4>
-          <h4>Part Sun / Part Shade Plants</h4>
-          <h4>Full Shade Plants</h4>
-
-        </div>
-       
-        </div>}
-
-    
       <div className="map-container-wrapper">
         {!pictureMode && (
           <div className="sidebar">
             Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
           </div>
         )}
-
 
         {!pictureMode && (
           <EyeDropDown
@@ -236,12 +250,10 @@ const Map = () => {
           />
         )}
         {imageData && (
-          <img className="map-container" src={imageData} alt="Captured" />
+          <img className="image-result" src={imageData} alt="Captured" />
         )}
         {!imageData && <div ref={mapContainer} className="map-container" />}
       </div>
-
-    
     </div>
   );
 };

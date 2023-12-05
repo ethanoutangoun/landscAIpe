@@ -136,7 +136,7 @@
 }
 
 .control-area {
-  flex: 1;
+  flex: 2;
   padding: 25px;
   padding-left: 35px;
 }
@@ -147,11 +147,13 @@
   padding-right: 20px;
   padding-bottom: 20px;
   border-radius: 7px;
+  /* max-height: 80vh;
+  overflow-y: hidden; */
 }
 
 .map-container-wrapper {
   display: flex;
-  flex: 2;
+  flex: 3;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -160,6 +162,7 @@
 }
 
 .map-container {
+  margin-top: 8px;
   height: 100%;
   width: 100%;
 }
@@ -261,4 +264,46 @@
 
 .search-box {
   margin-bottom: 20px;
+}
+
+
+.image-result{
+  margin-top: 5px;
+  height: 100%;
+  width: 100%;
+}
+
+.accordion{
+  height: 100vh;
+}
+
+.accordion-body{
+
+  max-height: 60vh;
+  overflow-y: scroll;
+}
+
+
+.plant-header{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.plant-header h5{
+  font-size: 15px;
+}
+
+.plant-header img{
+  border-radius: 6px;
+}
+
+.plant-card{
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.plant-card:hover{
+
+  background-color: rgb(240, 240, 240);
 }
