@@ -8,6 +8,7 @@ import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 
 
+
 const Map = () => {
   const accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
   mapboxgl.accessToken = accessToken;
@@ -24,6 +25,9 @@ const Map = () => {
   const [satView, setSatView] = useState(false);
   const [mapReady, setMapReady] = useState(false);
   const [zipcode, setZipcode] = useState(null);
+
+  // state to verify if data from the Mask RCNN API has been fetched
+  const [isProcessed, setIsProcessed] = useState(false);
 
   const handleOne = () => {
     map.current.setStyle("mapbox://styles/mapbox/streets-v12");
@@ -123,7 +127,7 @@ const Map = () => {
     
     };
 
-    console.log(postData);
+    
 
     fetch(url, {
       method: "POST",
@@ -145,6 +149,7 @@ const Map = () => {
       .then((data) => {
         const base64Image = data.image;
         setImageData(`data:image/jpeg;base64,${base64Image}`);
+        setIsProcessed(true);
       })
       .catch((error) => {
         console.error("Error:", error.message);
@@ -152,8 +157,11 @@ const Map = () => {
   };
 
   return (
+    
     <div className="map-container-main">
-      <div className="control-area">
+
+
+      {!isProcessed && <div className="control-area">
         <div className="control-box">
           <h3>Select Location</h3>
 
@@ -198,8 +206,20 @@ const Map = () => {
 
           {zipcode && <h4>Zipcode: {zipcode}</h4>}
         </div>
-      </div>
+      </div>}
 
+      {isProcessed && <div className="control-area">
+        <div className="control-box">
+          <h3>Suggested Plants</h3>
+          <h4>Full Sun Plants</h4>
+          <h4>Part Sun / Part Shade Plants</h4>
+          <h4>Full Shade Plants</h4>
+
+        </div>
+       
+        </div>}
+
+    
       <div className="map-container-wrapper">
         {!pictureMode && (
           <div className="sidebar">
@@ -220,6 +240,8 @@ const Map = () => {
         )}
         {!imageData && <div ref={mapContainer} className="map-container" />}
       </div>
+
+    
     </div>
   );
 };
