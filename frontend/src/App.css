@@ -267,8 +267,11 @@
 .image-result {
   margin-top: 5px;
   height: 100%;
-  width: 100%;
+  max-width: 100%;
+  width: auto;
 }
+
+
 
 .accordion {
   height: 100vh;
@@ -302,9 +305,33 @@
   background-color: rgb(240, 240, 240);
 }
 
-.results-title h3{
+.results-title h3 {
   margin: 0;
   padding: 10px;
   margin-bottom: 8px;
   border-top: 1px solid rgb(231, 229, 229);
 }
+
+.results-title p {
+  margin: 0;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgb(231, 229, 229);
+
+}
+
+
+
+
+.tips{
+  display:flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 15px;
+}
+
+.tips-info{
+  width: 100%;
+}
+
+

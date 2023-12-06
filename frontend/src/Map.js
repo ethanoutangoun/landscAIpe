@@ -7,6 +7,13 @@ import html2canvas from "html2canvas";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import CustomAccordion from "./CustomAccordion";
+import Alert from "@mui/material/Alert";
+import Collapse from "@mui/material/Collapse";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
+import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from "@mui/material/Backdrop";
+
 
 const Map = () => {
   const accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
@@ -24,8 +31,9 @@ const Map = () => {
   const [satView, setSatView] = useState(false);
   const [mapReady, setMapReady] = useState(false);
   const [zipcode, setZipcode] = useState(null);
-
+  const [open, setOpen] = useState(true);
   const [plants, setPlants] = useState();
+
 
   // state to verify if data from the Mask RCNN API has been fetched
   const [isProcessed, setIsProcessed] = useState(false);
@@ -103,12 +111,18 @@ const Map = () => {
       setLat(map.current.getCenter().lat.toFixed(4));
       setZoom(map.current.getZoom().toFixed(2));
     });
+
+    // const crosshair = document.createElement('div');
+    // crosshair.className = 'crosshair';
+    // mapContainer.current.appendChild(crosshair);
   }, [lng, lat, zoom, mapReady]);
 
   const [isPending, setIsPending] = useState(false);
 
   const url =
     "https://blooming-inlet-13535-f46fa0b9cfef.herokuapp.com/api/process";
+
+  const localurl = "http://localhost:8000/api/detection";
 
   const handlePost = () => {
     console.log("Posting data...");
@@ -178,6 +192,12 @@ const Map = () => {
 
   return (
     <div className="map-container-main">
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={isPending}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       {!isProcessed && (
         <div className="control-area">
           <div className="control-box">
@@ -213,14 +233,39 @@ const Map = () => {
               </h4>
             )}
 
+            {satView && !imageData && (
+              <div className="tips">
+                <Collapse className="tips-info" in={open}>
+                  <Alert
+                    action={
+                      <IconButton
+                        aria-label="close"
+                        color="inherit"
+                        size="small"
+                        onClick={() => {
+                          setOpen(false);
+                        }}
+                      >
+                        <CloseIcon fontSize="inherit" />
+                      </IconButton>
+                    }
+                    sx={{ mb: 2 }}
+                    severity="info"
+                  >
+                    For best results,{" "}
+                    <strong>center map on target house</strong>
+                  </Alert>
+                </Collapse>
+              </div>
+            )}
+
             {imageData && (
               <h4 className="confirm-btn" onClick={handlePost}>
-                Post Data
+                Run Model
                 <AutoAwesomeIcon />
               </h4>
             )}
 
-            {isPending && <div>Loading...</div>}
           </div>
         </div>
       )}
@@ -228,10 +273,22 @@ const Map = () => {
       {isProcessed && plants && (
         <div className="control-area">
           <div className="results-title">
-            <h3>Reccomended Plants</h3>
+            <h3>Recommended Plants</h3>
           </div>
-          
+
           <CustomAccordion plants={plants} className="accordion" />
+        </div>
+      )}
+
+      {isProcessed && !plants && (
+        <div className="control-area">
+          <div className="results-title">
+            <h3>Reccomended Plants</h3>
+            <p>
+              Sorry, landscaipe can only retrieve suggestions for locations in
+              California for now.
+            </p>
+          </div>
         </div>
       )}
 
@@ -250,9 +307,9 @@ const Map = () => {
           />
         )}
         {imageData && (
-          <img className="image-result" src={imageData} alt="Captured" />
+          <img className="image-result zoomed" src={imageData} alt="Captured" />
         )}
-        {!imageData && <div ref={mapContainer} className="map-container" />}
+        {!imageData && <div ref={mapContainer} className="map-container"></div>}
       </div>
     </div>
   );
