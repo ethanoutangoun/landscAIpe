@@ -13,7 +13,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
-
+import AlertTitle from "@mui/material/AlertTitle";
 
 const Map = () => {
   const accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
@@ -33,7 +33,6 @@ const Map = () => {
   const [zipcode, setZipcode] = useState(null);
   const [open, setOpen] = useState(true);
   const [plants, setPlants] = useState();
-
 
   // state to verify if data from the Mask RCNN API has been fetched
   const [isProcessed, setIsProcessed] = useState(false);
@@ -265,7 +264,6 @@ const Map = () => {
                 <AutoAwesomeIcon />
               </h4>
             )}
-
           </div>
         </div>
       )}
@@ -284,10 +282,10 @@ const Map = () => {
         <div className="control-area">
           <div className="results-title">
             <h3>Reccomended Plants</h3>
-            <p>
-              Sorry, landscaipe can only retrieve suggestions for locations in
-              California for now.
-            </p>
+            <Alert severity="error">
+              <AlertTitle>No Plant Data Available</AlertTitle>
+              Sorry! LandScaipe only has plant data in <strong>California</strong>
+            </Alert>
           </div>
         </div>
       )}
