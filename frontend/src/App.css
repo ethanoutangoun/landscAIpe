@@ -136,7 +136,7 @@
 }
 
 .control-area {
-  flex: 2;
+  flex: 1;
   padding: 25px;
   padding-left: 35px;
 }
@@ -153,7 +153,7 @@
 
 .map-container-wrapper {
   display: flex;
-  flex: 3;
+  flex: 2;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -203,8 +203,6 @@
   color: white;
   gap: 5px;
 }
-
-
 
 .confirm-btn:hover {
   cursor: pointer;
@@ -266,44 +264,47 @@
   margin-bottom: 20px;
 }
 
-
-.image-result{
+.image-result {
   margin-top: 5px;
   height: 100%;
   width: 100%;
 }
 
-.accordion{
+.accordion {
   height: 100vh;
 }
 
-.accordion-body{
-
+.accordion-body {
   max-height: 60vh;
   overflow-y: scroll;
 }
 
-
-.plant-header{
+.plant-header {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.plant-header h5{
+.plant-header h5 {
   font-size: 15px;
 }
 
-.plant-header img{
+.plant-header img {
   border-radius: 6px;
 }
 
-.plant-card{
+.plant-card {
   padding: 10px;
   margin-bottom: 15px;
 }
 
-.plant-card:hover{
-
+.plant-card:hover {
   background-color: rgb(240, 240, 240);
+}
+
+.results-title h3{
+  margin: 0;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-top: 1px solid rgb(231, 229, 229);
 }

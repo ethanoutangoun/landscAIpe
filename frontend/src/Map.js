@@ -227,11 +227,11 @@ const Map = () => {
 
       {isProcessed && plants && (
         <div className="control-area">
+          <div className="results-title">
+            <h3>Reccomended Plants</h3>
+          </div>
           
-         
-          <CustomAccordion plants = {plants} className="accordion"/>
-      
-          
+          <CustomAccordion plants={plants} className="accordion" />
         </div>
       )}
 
